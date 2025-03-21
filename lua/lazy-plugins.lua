@@ -5,10 +5,13 @@ require('lazy').setup({
 
     vim.keymap.set('n', '<leader>u', vim.cmd.UndotreeToggle),
   },
-
   'folke/zen-mode.nvim',
   'ThePrimeagen/vim-be-good',
   'xzbdmw/colorful-menu.nvim',
+  {
+    'Weyaaron/nvim-training',
+    pin = true,
+  },
 
   require 'kickstart/plugins/gitsigns',
 

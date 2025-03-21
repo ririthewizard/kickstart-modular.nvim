@@ -17,6 +17,7 @@ vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper win
 vim.keymap.set('n', '<space><space>x', '<cmd>source %<CR>', { desc = 'Source entire file ' })
 vim.keymap.set('n', '<space>x', ':.lua<CR>')
 vim.keymap.set('v', '<space>x', ':lua<CR>')
+
 vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv'")
 vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv'")
 
@@ -30,6 +31,9 @@ vim.keymap.set('n', 'n', 'nzzzv')
 vim.keymap.set('n', 'N', 'Nzzzv')
 
 vim.keymap.set('x', '<leader>p', '"_dP')
+
+vim.opt.undodir = os.getenv 'HOME' .. './vim/undodir'
+vim.opt.undofile = true
 
 vim.keymap.set('n', '<leader>cs', function()
   vim.fn.execute(':Telescope colorscheme', 'silent')
