@@ -32,7 +32,7 @@ vim.keymap.set('n', 'N', 'Nzzzv')
 
 vim.keymap.set('x', '<leader>p', '"_dP')
 
-vim.opt.undodir = os.getenv 'HOME' .. './vim/undodir'
+-- vim.opt.undodir = os.getenv 'HOME' .. './nvim/undodir'
 vim.opt.undofile = true
 
 vim.keymap.set('n', '<leader>cs', function()

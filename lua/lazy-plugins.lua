@@ -35,6 +35,8 @@ require('lazy').setup({
 
   require 'kickstart.plugins.colorschemes',
 
+  require 'kickstart.plugins.cloak',
+
   --{ import = 'custom.plugins' },
 }, {
   ui = {
