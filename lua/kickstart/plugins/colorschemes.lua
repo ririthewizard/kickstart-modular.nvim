@@ -72,7 +72,7 @@ return {
           variant = 'hard',
         },
       }
-      vim.cmd.colorscheme 'evergarden'
+      --vim.cmd.colorscheme 'evergarden'
     end,
   },
   {
