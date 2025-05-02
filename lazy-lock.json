@@ -25,6 +25,7 @@
   "nvim-training": { "branch": "main", "commit": "d6a6a0ef8be4ee460e5ac8ef9a021728c0034a97" },
   "nvim-treesitter": { "branch": "master", "commit": "94ea4f436d2b59c80f02e293466c374584f03b8c" },
   "nvim-web-devicons": { "branch": "master", "commit": "2c2b4eafce6cdd0cb165036faa17396eff18f847" },
+  "obsidian.nvim": { "branch": "main", "commit": "ae1f76a75c7ce36866e1d9342a8f6f5b9c2caf9b" },
   "plenary.nvim": { "branch": "master", "commit": "857c5ac632080dba10aae49dba902ce3abf91b35" },
   "rose-pine": { "branch": "main", "commit": "614892e32e94378d976a238f287532cfe790c1fe" },
   "solarized-osaka": { "branch": "main", "commit": "f796014c14b1910e08d42cc2077fef34f08e0295" },

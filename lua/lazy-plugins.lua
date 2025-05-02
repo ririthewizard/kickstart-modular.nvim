@@ -37,6 +37,8 @@ require('lazy').setup({
 
   require 'kickstart.plugins.cloak',
 
+  require 'kickstart.plugins.obsidian-nvim',
+
   --{ import = 'custom.plugins' },
 }, {
   ui = {
