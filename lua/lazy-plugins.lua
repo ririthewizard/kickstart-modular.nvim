@@ -31,13 +31,15 @@ require('lazy').setup({
 
   require 'kickstart/plugins/treesitter',
 
-  require 'kickstart.plugins.autopairs',
+  require 'kickstart/plugins/autopairs',
 
-  require 'kickstart.plugins.colorschemes',
+  require 'kickstart/plugins/colorschemes',
 
-  require 'kickstart.plugins.cloak',
+  require 'kickstart/plugins/cloak',
 
-  require 'kickstart.plugins.obsidian-nvim',
+  require 'kickstart/plugins/obsidian-nvim',
+
+  require 'kickstart/plugins/nvim-dap',
 
   --{ import = 'custom.plugins' },
 }, {

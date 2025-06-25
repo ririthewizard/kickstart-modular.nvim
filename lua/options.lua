@@ -7,7 +7,7 @@ vim.schedule(function()
   vim.opt.clipboard = 'unnamedplus'
 end)
 
-vim.opt_local.conceallevel = 2
+vim.opt.conceallevel = 2
 
 vim.opt.termguicolors = true
 vim.opt.wrap = false

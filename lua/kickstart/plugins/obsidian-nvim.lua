@@ -29,6 +29,26 @@ return {
         min_chars = 3,
       },
 
+      ---@param title string|?
+      ---@return string
+      note_id_func = function(title)
+        local suffix = ''
+        if title ~= nil then
+          suffix = title:gsub(' ', '-'):lower()
+        else
+          for _ = 1, 4 do
+            suffix = 'Inbox' .. string.char(math.random(69, 94))
+          end
+        end
+        return suffix
+      end,
+
+      templates = {
+        folder = '~/Desktop/Obsidian/Things And Stuff/Templates/',
+        date_format = '%Y-%m-%d-%a',
+        time_format = '%H:%M',
+      },
+
       preferred_link_style = 'markdown',
     },
   },
