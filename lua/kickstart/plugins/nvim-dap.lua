@@ -15,11 +15,13 @@ return {
       local ui = require 'dapui'
       local dap_virtual_text = require 'nvim-dap-virtual-text'
 
-      dap_virtual_text.setup()
+      dap_virtual_text.setup {
+        commented = true,
+      }
 
       mason_dap.setup {
         ensure_installed = { 'netcoredbg' },
-        automatic_installion = true,
+        automatic_installation = true,
         handlers = {
           function(config)
             require('mason-nvim-dap').default_setup(config)
@@ -27,7 +29,7 @@ return {
         },
       }
 
-      local netcoredbg = vim.fn.exepath 'netcoredbg'
+      local netcoredbg = '/home/void/.local/share/nvim/mason/bin/netcoredbg'
       dap.adapters.coreclr = {
         type = 'executable',
         command = netcoredbg,
@@ -40,7 +42,7 @@ return {
           name = 'launch - netcoredbg',
           request = 'launch',
           program = function()
-            return vim.fn.input('Path to dll ', vim.fn.getcwd() .. '/bin/Debug/net8.0', 'file')
+            return vim.fn.input('Path to dll ', vim.fn.getcwd() .. '/bin/Debug/', 'file')
           end,
         },
       }

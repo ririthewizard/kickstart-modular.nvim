@@ -8,6 +8,7 @@ vim.schedule(function()
 end)
 
 vim.opt.conceallevel = 2
+vim.opt.wrap = false
 
 vim.opt.termguicolors = true
 vim.opt.wrap = false

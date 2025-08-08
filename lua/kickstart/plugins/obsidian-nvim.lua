@@ -18,8 +18,6 @@ return {
       'hrsh7th/nvim-cmp',
       'nvim-telescope/telescope.nvim',
       'nvim-treesitter',
-
-      -- see below for full list of optional dependencies 👇
     },
     opts = {
       dir = '~/Desktop/Obsidian/Things and Stuff/',
@@ -44,7 +42,7 @@ return {
       end,
 
       templates = {
-        folder = '~/Desktop/Obsidian/Things And Stuff/Templates/',
+        folder = '~/Desktop/Obsidian/Things and Stuff/Templates/',
         date_format = '%Y-%m-%d-%a',
         time_format = '%H:%M',
       },

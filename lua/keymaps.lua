@@ -24,6 +24,8 @@ vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv'")
 vim.keymap.set('n', '<M-j>', '<cmd>cnext<CR>')
 vim.keymap.set('n', '<M-k>', '<cmd>cprev<CR>')
 
+vim.keymap.set('n', '.lb', ':set linebreak<CR>')
+
 vim.keymap.set('n', '<C-d>', '<C-d>zz')
 vim.keymap.set('n', '<C-u>', '<C-u>zz')
 

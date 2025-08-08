@@ -30,8 +30,9 @@ return {
       end,
       formatters_by_ft = {
         lua = { 'stylua' },
-        python = { 'isort', 'black', stop_after_first = true },
+        python = { 'pyright', 'blue' },
         java = { 'uncrustify' },
+        javascript = { 'oxlint' },
       },
     },
   },
