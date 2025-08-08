@@ -1,9 +1,12 @@
+require("config.lsp.lsp")
+require("config.colors.rosepine")
+require("config.treesitter")
+
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
 vim.g.have_nerd_font = true
 
-vim.cmd.colorscheme("sorbet")
 vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
 vim.api.nvim_set_hl(0, "NormalNC", { bg = "none" })
 vim.api.nvim_set_hl(0, "EndOfBuffer", { bg = "none" })
@@ -71,8 +74,9 @@ vim.opt.inccommand = "split"
 vim.opt.list = true
 vim.opt.listchars = { tab = "» " }
 
-
--- Keymaps -===============================================
+-- ==================================
+-- Keymaps
+-- ==================================
 
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 
@@ -92,6 +96,10 @@ vim.keymap.set("n", "<leader>pa", function()
     vim.fn.setreg("+", path)
     print("file:", path)
 end, { desc = "Copies file [p]ath" })
+
+vim.keymap.set("n", "<leader>cs", function()
+    vim.fn.execute(":Telescope colorscheme", "silent")
+end, { desc = "Change the color scheme" })
 
 -- Reminders
 vim.keymap.set("n", "<left>", "<cmd>echo 'Use h to move!!!'<CR>")
