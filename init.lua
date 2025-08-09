@@ -1,6 +1,7 @@
 require("config.lsp.lsp")
 require("config.colors.rosepine")
 require("config.treesitter")
+require("config.telescope")
 
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
@@ -18,7 +19,7 @@ vim.opt_local.conceallevel = 2
 vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.cursorline = true
-vim.opt.wrap = true
+vim.opt.wrap = false
 vim.opt.scrolloff = 9
 
 -- Indentation
@@ -158,7 +159,7 @@ vim.api.nvim_create_autocmd("TextYankPost", {
     desc = "Highling when yanking text",
     group = vim.api.nvim_create_augroup("kickstart-highlight-yank", { clear = true }),
     callback = function()
-	vim.highlight.on_yank()
+	vim.hl.on_yank()
     end,
 })
 
