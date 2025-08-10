@@ -1,8 +1,3 @@
-require("pack.lsp.start.lsp")
-require("pack.colors.opts.rosepine")
-require("pack.finder-picker.start.telescope")
-require("pack.finder-picker.start.treesitter")
-
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
@@ -44,6 +39,7 @@ vim.opt.showmode = false
 vim.opt.pumheight = 10
 vim.opt.pumblend = 10
 vim.opt.winblend = 0
+vim.opt.winborder = "rounded"
 vim.opt.conceallevel = 0
 vim.opt.concealcursor = ""
 vim.opt.lazyredraw = true
@@ -92,14 +88,16 @@ vim.keymap.set("x", "<leader>p", "'_dP'", { desc = "Paste without overriding wha
 
 vim.keymap.set("n", "<leader>ec", ":e ~/.config/nvim/init.lua<CR>", { desc = "[E]dit [C]onfig" })
 
+vim.keymap.set("n", "<leader>lf", vim.lsp.buf.format, { desc = "[L}SP buffer [F]ormat" })
+
 vim.keymap.set("n", "<leader>pa", function()
-    local path = vim.fn.expand("%:p")
-    vim.fn.setreg("+", path)
-    print("file:", path)
+	local path = vim.fn.expand("%:p")
+	vim.fn.setreg("+", path)
+	print("file:", path)
 end, { desc = "Copies file [p]ath" })
 
 vim.keymap.set("n", "<leader>cs", function()
-    vim.fn.execute(":Telescope colorscheme", "silent")
+	vim.fn.execute(":Telescope colorscheme", "silent")
 end, { desc = "Change the color scheme" })
 
 -- Reminders
@@ -109,10 +107,10 @@ vim.keymap.set("n", "<up>", "<cmd>echo 'Use k to move!!!'<CR>")
 vim.keymap.set("n", "<down>", "<cmd>echo 'Use j to move!!!'<CR>")
 
 -- Buffer movement
-vim.keymap.set("n", "<C-h>", "<C-w><C-h>", { desc = "Move focus to the left window"})
-vim.keymap.set("n", "<C-h>", "<C-w><C-l>", { desc = "Move focus to the right window"})
-vim.keymap.set("n", "<C-h>", "<C-w><C-k>", { desc = "Move focus to the upper window"})
-vim.keymap.set("n", "<C-h>", "<C-w><C-j>", { desc = "Move focus to the lower window"})
+vim.keymap.set("n", "<C-h>", "<C-w><C-h>", { desc = "Move focus to the left window" })
+vim.keymap.set("n", "<C-h>", "<C-w><C-l>", { desc = "Move focus to the right window" })
+vim.keymap.set("n", "<C-h>", "<C-w><C-k>", { desc = "Move focus to the upper window" })
+vim.keymap.set("n", "<C-h>", "<C-w><C-j>", { desc = "Move focus to the lower window" })
 
 -- Config file specifics
 vim.keymap.set("n", "<leader><leader>x", "<cmd>source %<CR>", { desc = "Source entire file" })
@@ -156,31 +154,31 @@ vim.opt.maxmempattern = 20000
 local augroup = vim.api.nvim_create_augroup("UserConfig", {})
 
 vim.api.nvim_create_autocmd("TextYankPost", {
-    desc = "Highling when yanking text",
-    group = vim.api.nvim_create_augroup("kickstart-highlight-yank", { clear = true }),
-    callback = function()
-	vim.hl.on_yank()
-    end,
+	desc = "Highling when yanking text",
+	group = vim.api.nvim_create_augroup("kickstart-highlight-yank", { clear = true }),
+	callback = function()
+		vim.hl.on_yank()
+	end,
 })
 
 vim.api.nvim_create_autocmd("BufReadPost", {
-    desc = "Return to last edit position on file open",
-    group = augroup,
-    callback = function()
-	local mark = vim.api.nvim_buf_get_mark(0, '"')
-	local lcount = vim.api.nvim_buf_line_count(0)
-	if mark[1] > 0 and mark[1] <= lcount then
-	    pcall(vim.api.nvim_win_set_cursor, 0, mark)
-	end
-    end,
+	desc = "Return to last edit position on file open",
+	group = augroup,
+	callback = function()
+		local mark = vim.api.nvim_buf_get_mark(0, '"')
+		local lcount = vim.api.nvim_buf_line_count(0)
+		if mark[1] > 0 and mark[1] <= lcount then
+			pcall(vim.api.nvim_win_set_cursor, 0, mark)
+		end
+	end,
 })
 
 vim.api.nvim_create_autocmd("VimResized", {
-    desc = "Resize splits when window is resized",
-    group = augroup,
-    callback = function()
-	vim.cmd("tabdo wincmd =")
-    end,
+	desc = "Resize splits when window is resized",
+	group = augroup,
+	callback = function()
+		vim.cmd("tabdo wincmd =")
+	end,
 })
 
 -- ====================================================
@@ -189,86 +187,86 @@ vim.api.nvim_create_autocmd("VimResized", {
 
 -- Git branch function
 local function git_branch()
-    local branch = vim.fn.system("git branch --show-current 2>/dev/null | tr -d '\n'")
-    if branch ~= "" then
-	return " " .. branch .. " "
-    end
-    return ""
+	local branch = vim.fn.system("git branch --show-current 2>/dev/null | tr -d '\n'")
+	if branch ~= "" then
+		return " " .. branch .. " "
+	end
+	return ""
 end
 
 -- File type with indicators
 local function file_type()
-    local ft = vim.bo.filetype
-    local icons = {
-	lua = "[LUA]",
-	python = "[PY]",
-	javascript = "[JS]",
-	html = "[HTML]",
-	css = "[CSS]",
-	json = "[JSON]",
-	markdown = "[MD]",
-	go = "[GO]",
-	sh = "[SH]",
-    }
+	local ft = vim.bo.filetype
+	local icons = {
+		lua = "[LUA]",
+		python = "[PY]",
+		javascript = "[JS]",
+		html = "[HTML]",
+		css = "[CSS]",
+		json = "[JSON]",
+		markdown = "[MD]",
+		go = "[GO]",
+		sh = "[SH]",
+	}
 
-    if ft == "" then
-	return " "
-    end
+	if ft == "" then
+		return " "
+	end
 
-    return (icons[ft] or ft)
+	return (icons[ft] or ft)
 end
 
 -- LSP status
 local function lsp_status()
-    local clients = vim.lsp.get_clients({ bufnr = 0 })
-    if #clients > 0 then
-	return " LSP"
-    end
-    return ""
+	local clients = vim.lsp.get_clients({ bufnr = 0 })
+	if #clients > 0 then
+		return " LSP"
+	end
+	return ""
 end
 
--- Word count for text files
+-- Word count for "regular" files
 local function word_count()
-    local ft = vim.bo.filetype
-    if ft == "markdown" or ft == "text" or ft == "tex" then
-	local words = vim.fn.wordcount().words
-	return " " .. words .. " words"
-    end
-    return ""
+	local ft = vim.bo.filetype
+	if ft == "markdown" or ft == "text" or ft == "tex" then
+		local words = vim.fn.wordcount().words
+		return " " .. words .. " words"
+	end
+	return ""
 end
 
 -- File size
 local function file_size()
-    local size = vim.fn.getfsize(vim.fn.expand("%"))
-    if size < 0 then return "" end
-    if size < 1024 then
-	return size .. " B"
-    elseif size < 1024 * 1024 then
-	return string.format("%.1fK", size / 1024)
-    else
-	return string.format("%.1fM", size / 1024 / 1024)
-    end
+	local size = vim.fn.getfsize(vim.fn.expand("%"))
+	if size < 0 then return "" end
+	if size < 1024 then
+		return size .. " B"
+	elseif size < 1024 * 1024 then
+		return string.format("%.1fK", size / 1024)
+	else
+		return string.format("%.1fM", size / 1024 / 1024)
+	end
 end
 
 -- Mode indicators
 local function mode_icon()
-    local mode = vim.fn.mode()
-    local modes = {
-	n = "NORMAL",
-	i = "INSERT",
-	v = "VISUAL",
-	V = "V-LINE",
-	["\22"] = "V-BLOCK", -- <C-v>
-	c = "COMMAND",
-	s = "SELECT",
-	S = "S-LINE",
-	["\19"] = "S-BLOCK", -- <C-s>
-	R = "REPLACE",
-	r = "REPLACE",
-	["!"] = "SHELL",
-	t = "TERMINAL"
-    }
-    return modes[mode] or " " .. mode:upper()
+	local mode = vim.fn.mode()
+	local modes = {
+		n = "NORMAL",
+		i = "INSERT",
+		v = "VISUAL",
+		V = "V-LINE",
+		["\22"] = "V-BLOCK", -- <C-v>
+		c = "COMMAND",
+		s = "SELECT",
+		S = "S-LINE",
+		["\19"] = "S-BLOCK", -- <C-s>
+		R = "REPLACE",
+		r = "REPLACE",
+		["!"] = "SHELL",
+		t = "TERMINAL"
+	}
+	return modes[mode] or " " .. mode:upper()
 end
 
 _G.mode_icon = mode_icon
@@ -284,33 +282,33 @@ vim.cmd([[
 
 -- Function to change status line based on window focus
 local function setup_dynamic_statusline()
-    vim.api.nvim_create_autocmd({"WinEnter", "BufEnter"}, {
-	callback = function()
-	    vim.opt_local.statusline = table.concat {
-		" ",
-		"%#StatusLineBold#",
-		"%{v:lua.mode_icon()}",
-		"%#StatusLine#",
-		" | %f %h%m%r",
-		"%{v:lua.git_branch()}",
-		" | ",
-		"%{v:lua.file_type()}",
-		" | ",
-		"%{v:lua.file_size()}",
-		" | ",
-		"%{v:lua.lsp_status()}",
-		"%=",                    -- Right-align everything after this
-		"%l:%c  %P",             -- Line:Column and Percentage
-	    }
-	end
-    })
-    vim.api.nvim_set_hl(0, "StatusLineBold", { bold = true })
+	vim.api.nvim_create_autocmd({ "WinEnter", "BufEnter" }, {
+		callback = function()
+			vim.opt_local.statusline = table.concat {
+				" ",
+				"%#StatusLineBold#",
+				"%{v:lua.mode_icon()}",
+				"%#StatusLine#",
+				" | %f %h%m%r",
+				"%{v:lua.git_branch()}",
+				" | ",
+				"%{v:lua.file_type()}",
+				" | ",
+				"%{v:lua.file_size()}",
+				" | ",
+				"%{v:lua.lsp_status()}",
+				"%=", -- Right-align everything after this
+				"%l:%c  %P", -- Line:Column and Percentage
+			}
+		end
+	})
+	vim.api.nvim_set_hl(0, "StatusLineBold", { bold = true })
 
-    vim.api.nvim_create_autocmd({"WinLeave", "BufLeave"}, {
-	callback = function()
-	    vim.opt_local.statusline = " %f %h%m%r | %{v:lua.file_type()} | %= %l:%c  %P"
-	end
-    })
+	vim.api.nvim_create_autocmd({ "WinLeave", "BufLeave" }, {
+		callback = function()
+			vim.opt_local.statusline = " %f %h%m%r | %{v:lua.file_type()} | %= %l:%c  %P"
+		end
+	})
 end
 
 setup_dynamic_statusline()
@@ -319,41 +317,41 @@ setup_dynamic_statusline()
 -- Color scheme
 -- ===============================
 vim.pack.add({
-	{ src ="https://github.com/rose-pine/neovim" }
+	{ src = "https://github.com/rose-pine/neovim" }
 })
 
 require("rose-pine").setup({
-    styles = {
-	transparency = true,
-    },
+	styles = {
+		transparency = true,
+	},
 })
 
-vim.cmd[[colorscheme rose-pine]]
+vim.cmd [[colorscheme rose-pine]]
 
 -- ===============================
 -- Telescope
 -- ===============================
-vim.pack.add{
-    { src = "https://github.com/nvim-telescope/telescope.nvim" },
-    { src = "https://github.com/nvim-lua/plenary.nvim" },
-    { src = "https://github.com/nvim-telescope/telescope-fzf-native.nvim", build = "make",
-	cond = function()
-	    return vim.fn.executable "make" == 1
-	end,
-    },
-    { src = "https://github.com/nvim-telescope/telescope-ui-select.nvim" },
-    { src = "https://github.com/nvim-tree/nvim-web-devicons", enabled = vim.g.have_nerd_font }
+vim.pack.add {
+	{ src = "https://github.com/nvim-telescope/telescope.nvim" },
+	{ src = "https://github.com/nvim-lua/plenary.nvim" },
+	{ src = "https://github.com/nvim-telescope/telescope-fzf-native.nvim", build = "make",
+		cond = function()
+			return vim.fn.executable "make" == 1
+		end,
+	},
+	{ src = "https://github.com/nvim-telescope/telescope-ui-select.nvim" },
+	{ src = "https://github.com/nvim-tree/nvim-web-devicons",            enabled = vim.g.have_nerd_font }
 }
 
 require("telescope").setup({
-    pickers = {
-	find_files = {
-	    theme = "ivy",
+	pickers = {
+		find_files = {
+			theme = "ivy",
+		},
 	},
-    },
-    extensions = {
-	fzf = {},
-    },
+	extensions = {
+		fzf = {},
+	},
 })
 
 pcall(require("telescope").load_extension, "fzf")
@@ -369,113 +367,123 @@ vim.keymap.set("n", "<leader>sd", builtin.diagnostics, { desc = "[S]earch [D]iag
 vim.keymap.set("n", "<leader>sr", builtin.resume, { desc = "[S]earch [R]esume" })
 
 vim.keymap.set("n", "<leader>/", function()
-    builtin.current_buffer_fuzzy_find(require("telescope.themes").get_dropdown {
-	winblend = 10,
-	previewer = false,
-    })
+	builtin.current_buffer_fuzzy_find(require("telescope.themes").get_dropdown {
+		winblend = 10,
+		previewer = false,
+	})
 end, { desc = "[/] Fuzzily search in current buffer" })
 
 vim.keymap.set("n", "<leader>s/", function()
-    builtin.live_grep {
-	grep_open_files = true,
-	prompt_title = "Live Grep in Open Files"
-    }
+	builtin.live_grep {
+		grep_open_files = true,
+		prompt_title = "Live Grep in Open Files"
+	}
 end, { desc = "[/] Live Grep in Open Files" })
 
 vim.keymap.set("n", "<leader>ec", function()
-    builtin.find_files { cwd = vim.fn.stdpath "config" }
+	builtin.find_files { cwd = vim.fn.stdpath "config" }
 end, { desc = "[E]dit [C]onfig" })
 
 -- ===============================
 -- Treesitter
 -- ===============================
 vim.pack.add({
-    { src="https://github.com/nvim-treesitter/nvim-treesitter", version="master" }
+	{ src = "https://github.com/nvim-treesitter/nvim-treesitter", version = "master" }
 })
 
-require'nvim-treesitter.configs'.setup ({
-  -- A list of parser names, or "all" (the listed parsers MUST always be installed)
-  ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "markdown", "markdown_inline", "html", "java", "javascript", "go", "python" },
+require 'nvim-treesitter.configs'.setup({
+	-- A list of parser names, or "all" (the listed parsers MUST always be installed)
+	ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "markdown", "markdown_inline", "html", "java", "javascript", "go", "python" },
 
-  -- Automatically install missing parsers when entering buffer
-  -- Recommendation: set to false if you don't have `tree-sitter` CLI installed locally
-  auto_install = true,
+	-- Automatically install missing parsers when entering buffer
+	-- Recommendation: set to false if you don't have `tree-sitter` CLI installed locally
+	auto_install = true,
 
-  highlight = {
-    enable = true,
-    additional_vim_regex_highlighting = false,
-  },
-  indent = {
-      enable = true,
-  },
+	highlight = {
+		enable = true,
+		additional_vim_regex_highlighting = false,
+	},
+	indent = {
+		enable = true,
+	},
 })
 
 vim.api.nvim_create_autocmd("PackChanged", {
-    desc = "Handle nvim-treesitter updates",
-    group = vim.api.nvim_create_augroup("nvim-treesitter-pack-changed-update-handler", { clear = true }),
-    callback = function(event)
-	if event.data.kind == "update" then
-	    vim.notify("nvim-treesitter updated, running TSUpdate...", vim.log.levels.INFO)
-	    --@diagnostic disable-next-line: param-type-mismatch
-	    local ok = pcall(vim.cmd, "TSUpdate")
-	    if ok then
-		vim.notify("TSUpdate completed successfully!", vim.log.levels.INFO)
-	    else
-		vim.notify("TSUpdate command not available yet, skipping", vim.log.levels.INFO)
-	    end
-	end
-    end,
+	desc = "Handle nvim-treesitter updates",
+	group = vim.api.nvim_create_augroup("nvim-treesitter-pack-changed-update-handler", { clear = true }),
+	callback = function(event)
+		if event.data.kind == "update" then
+			vim.notify("nvim-treesitter updated, running TSUpdate...", vim.log.levels.INFO)
+			--@diagnostic disable-next-line: param-type-mismatch
+			local ok = pcall(vim.cmd, "TSUpdate")
+			if ok then
+				vim.notify("TSUpdate completed successfully!", vim.log.levels.INFO)
+			else
+				vim.notify("TSUpdate command not available yet, skipping", vim.log.levels.INFO)
+			end
+		end
+	end,
 })
 
 -- ===============================
 -- LSP
 -- ===============================
-vim.pack.add{
-  { src = "https://github.com/neovim/nvim-lspconfig" },
-  { src = "https://github.com/mason-org/mason.nvim" },
-  { src = "https://github.com/mason-org/mason-lspconfig.nvim" },
-  { src = "https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim" },
+vim.pack.add {
+	{ src = "https://github.com/neovim/nvim-lspconfig" },
+	{ src = "https://github.com/mason-org/mason.nvim" },
+	{ src = "https://github.com/mason-org/mason-lspconfig.nvim" },
+	{ src = "https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim" },
 }
 
 require("mason").setup()
 require("mason-lspconfig").setup()
 require("mason-tool-installer").setup({
-    ensure_installed = {
-	"lua_ls",
-	"stylua",
-	"blue",
-	"clangd",
-	"csharp_ls",
-	"gopls",
-	"jdtls",
-	"html",
-	"markdown_oxide",
-	"netcoredbg",
-	"oxlint",
-	"prettierd",
-	"pyright",
-    }
+	ensure_installed = {
+		"lua_ls",
+		"stylua",
+		"blue",
+		"clangd",
+		"csharp_ls",
+		"gopls",
+		"jdtls",
+		"html",
+		"markdown_oxide",
+		"netcoredbg",
+		"oxlint",
+		"prettierd",
+		"pyright",
+		"sith-language-server",
+	}
 })
 
 vim.lsp.config("lua_ls", {
-    settings = {
-	Lua = {
-	    runtime = {
-		version = "LuaJIT",
-	    },
-	    diagnostics = {
-		globals = {
-		    "vim",
-		    "require",
+	settings = {
+		Lua = {
+			runtime = {
+				version = "LuaJIT",
+			},
+			diagnostics = {
+				globals = {
+					"vim",
+					"require",
+				},
+			},
+			workspace = {
+				library = vim.api.nvim_get_runtime_file("", true),
+			},
+			telemetry = {
+				enable = false,
+			},
 		},
-	    },
-	    workspace = {
-		library = vim.api.nvim_get_runtime_file("", true),
-	    },
-	    telemetry = {
-		enable = false,
-	    },
 	},
-    },
 })
 
+vim.diagnostic.config({
+	virtual_lines = true
+})
+
+-- ===============================
+-- Miscellaneous
+-- ===============================
+vim.pack.add{"https://github.com/mbbill/undotree"}
+vim.keymap.set("n", "<leader>U", vim.cmd.UndotreeToggle)
