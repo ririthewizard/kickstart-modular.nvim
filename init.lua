@@ -16,6 +16,7 @@ vim.opt.relativenumber = true
 vim.opt.cursorline = true
 vim.opt.wrap = false
 vim.opt.scrolloff = 9
+vim.cmd.filetype("plugin indent on")
 
 -- Indentation
 vim.opt.shiftwidth = 4
@@ -108,9 +109,9 @@ vim.keymap.set("n", "<down>", "<cmd>echo 'Use j to move!!!'<CR>")
 
 -- Buffer movement
 vim.keymap.set("n", "<C-h>", "<C-w><C-h>", { desc = "Move focus to the left window" })
-vim.keymap.set("n", "<C-h>", "<C-w><C-l>", { desc = "Move focus to the right window" })
-vim.keymap.set("n", "<C-h>", "<C-w><C-k>", { desc = "Move focus to the upper window" })
-vim.keymap.set("n", "<C-h>", "<C-w><C-j>", { desc = "Move focus to the lower window" })
+vim.keymap.set("n", "<C-l>", "<C-w><C-l>", { desc = "Move focus to the right window" })
+vim.keymap.set("n", "<C-k>", "<C-w><C-k>", { desc = "Move focus to the upper window" })
+vim.keymap.set("n", "<C-j>", "<C-w><C-j>", { desc = "Move focus to the lower window" })
 
 -- Config file specifics
 vim.keymap.set("n", "<leader><leader>x", "<cmd>source %<CR>", { desc = "Source entire file" })
@@ -119,6 +120,9 @@ vim.keymap.set("v", "<leader>x", ":lua<CR>")
 
 vim.keymap.set("n", "<M-j>", "<cmd>cnext<CR>")
 vim.keymap.set("n", "<M-k>", "<cmd>cprev<CR>")
+
+vim.keymap.set("n", "<leader>ps", "<cmd>lua vim.pack.update()<CR>",
+	{ desc = "Updates plugins (write to confirm, quit to discard" })
 
 -- Visual QOL
 vim.keymap.set("n", "<C-d>", "<C-d>zz", { desc = "Half page down (centered)" })
@@ -485,5 +489,5 @@ vim.diagnostic.config({
 -- ===============================
 -- Miscellaneous
 -- ===============================
-vim.pack.add{"https://github.com/mbbill/undotree"}
+vim.pack.add { "https://github.com/mbbill/undotree" }
 vim.keymap.set("n", "<leader>U", vim.cmd.UndotreeToggle)
