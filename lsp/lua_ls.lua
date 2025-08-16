@@ -19,7 +19,7 @@ return {
 				enable = true,
 			},
 			diagnostics = {
-		enable = true,
+				enable = true,
 				globals = {
 					"vim",
 					"require",
