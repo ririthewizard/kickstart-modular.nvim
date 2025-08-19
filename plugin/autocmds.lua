@@ -30,3 +30,11 @@ vim.api.nvim_create_autocmd("VimResized", {
 		vim.cmd("tabdo wincmd =")
 	end,
 })
+
+vim.api.nvim_create_autocmd("BufWritePre", {
+	desc = "Formats buffer on write",
+	group = augroup,
+	callback = function()
+		pcall(vim.lsp.buf.format);
+	end,
+})
