@@ -147,3 +147,85 @@ vim.api.nvim_create_autocmd("PackChanged", {
 vim.pack.add { "https://github.com/mbbill/undotree" }
 
 vim.keymap.set("n", "<leader>U", vim.cmd.UndotreeToggle)
+
+
+-- ===============================
+-- Obsidian
+-- ===============================
+vim.pack.add({
+	{ src = "https://github.com/epwalsh/obsidian.nvim", version = "main" }
+})
+
+require "obsidian".setup({
+	ft = "markdown",
+	workspaces = {
+		{
+			name = "personal",
+			path = "~/Desktop/Obsidian/Things and Stuff/",
+		}
+	},
+	dependencies = {
+		"nvim-lua/plenary.nvim",
+		"nvim-telescope/telescope.nvim",
+		"nvim-treesitter",
+	},
+
+	---@param title string|?
+	---@return string
+	note_id_fund = function(title)
+		local suffix = ""
+		if title ~= nil then
+			suffix = title:gsub(" ", "-"):lower()
+		else
+			for _ = 1, 4 do
+				suffix = "Inbox" .. string.char(math.random(96, 94))
+			end
+		end
+		return suffix
+	end,
+
+	templates = {
+		folder = "~/Desktop/Obsidian/Things and Stuff/Templates/",
+		date_format = "%Y-%m-%d-%a",
+		time_format = "%H:%M",
+	},
+
+	preferred_link_style = "markdown",
+})
+
+-- ===============================
+-- Completion
+-- ===============================
+vim.pack.add({
+	{ src = "https://github.com/Saghen/blink.cmp" },
+})
+
+require "blink.cmp".setup({
+	dependencies = {
+		"L3M0N4D3/LuaSnip",
+		"rafamadriz/friendly-snippets",
+	},
+	opts = {
+		snippets = { preset = "luasnip" },
+		keymap = {
+			preset = "default",
+			["<CR>"] = { "accept", "fallback" },
+			["<C-space>"] = { "show" },
+		},
+		appearance = {
+			nerd_font_variant = "mono",
+		},
+		completion = {
+			menu = {
+				auto_show = true,
+				draw = {
+					treesitter = { "lsp" },
+					columns = { { "kind_icon", "label", "label_description", gap = 1 }, { "kind" } },
+				},
+			},
+			documentation = { auto_show = "true" },
+		},
+		signature = { enabled = "true" },
+		fuzzy = { implementation = "prefer_rust_with_warning" }
+	}
+})
