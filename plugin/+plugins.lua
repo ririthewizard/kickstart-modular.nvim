@@ -114,6 +114,8 @@ require 'nvim-treesitter.configs'.setup({
 	-- Automatically install missing parsers when entering buffer
 	-- Recommendation: set to false if you don't have `tree-sitter` CLI installed locally
 	auto_install = true,
+	modules = {},
+	ignore_install = {},
 
 	highlight = {
 		enable = true,
@@ -197,7 +199,7 @@ require "obsidian".setup({
 -- Completion
 -- ===============================
 vim.pack.add({
-	{ src = "https://github.com/Saghen/blink.cmp" },
+	{ src = "https://github.com/Saghen/blink.cmp", version = "1.*" },
 })
 
 require "blink.cmp".setup({
@@ -216,6 +218,7 @@ require "blink.cmp".setup({
 			nerd_font_variant = "mono",
 		},
 		completion = {
+			accept = { auto_brackets = { enabled = false }, },
 			menu = {
 				auto_show = true,
 				draw = {

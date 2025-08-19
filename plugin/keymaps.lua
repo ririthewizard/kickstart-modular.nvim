@@ -13,7 +13,7 @@ vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv'", { desc = "Move highlighted line(s)
 
 vim.keymap.set("x", "<leader>p", "'_dP'", { desc = "Paste without overriding what's in your paste buffer" })
 
-vim.keymap.set("n", "<leader>ec", ":e ~/.config/nvim/init.lua<CR>", { desc = "[E]dit [C]onfig" })
+vim.keymap.set("n", "<leader>ec", ":e ~/.config/nvim/<CR>", { desc = "[E]dit [C]onfig" })
 
 vim.keymap.set("n", "<leader>lf", vim.lsp.buf.format, { desc = "[L}SP buffer [F]ormat" })
 
