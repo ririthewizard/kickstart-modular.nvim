@@ -41,7 +41,7 @@ vim.opt.pumheight = 10
 vim.opt.pumblend = 10
 vim.opt.winblend = 0
 vim.opt.winborder = "rounded"
-vim.opt.conceallevel = 0
+vim.opt.conceallevel = 2
 vim.opt.concealcursor = ""
 vim.opt.lazyredraw = true
 vim.opt.splitright = true
@@ -97,4 +97,3 @@ vim.lsp.config("lua_ls", {
 		},
 	},
 })
-
