@@ -174,7 +174,7 @@ require "obsidian".setup({
 
 	---@param title string|?
 	---@return string
-	note_id_fund = function(title)
+	note_id_func = function(title)
 		local suffix = ""
 		if title ~= nil then
 			suffix = title:gsub(" ", "-"):lower()
@@ -199,36 +199,32 @@ require "obsidian".setup({
 -- Completion
 -- ===============================
 vim.pack.add({
-	{ src = "https://github.com/Saghen/blink.cmp", version = vim.version.range("^1") },
+	{ src = "https://github.com/Saghen/blink.cmp",            version = vim.version.range("^1") },
+	{ src = "https://github.com/L3MON4D3/LuaSnip" },
+	{ src = "https://github.com/rafamadriz/friendly-snippets" }
 })
 
 require "blink.cmp".setup({
-	dependencies = {
-		"L3M0N4D3/LuaSnip",
-		"rafamadriz/friendly-snippets",
+	snippets = { preset = "luasnip" },
+	keymap = {
+		preset = "default",
+		["<CR>"] = { "accept", "fallback" },
+		["<C-space>"] = { "show" },
 	},
-	opts = {
-		snippets = { preset = "luasnip" },
-		keymap = {
-			preset = "default",
-			["<CR>"] = { "accept", "fallback" },
-			["<C-space>"] = { "show" },
-		},
-		appearance = {
-			nerd_font_variant = "mono",
-		},
-		completion = {
-			accept = { auto_brackets = { enabled = false }, },
-			menu = {
-				auto_show = true,
-				draw = {
-					treesitter = { "lsp" },
-					columns = { { "kind_icon", "label", "label_description", gap = 1 }, { "kind" } },
-				},
+	appearance = {
+		nerd_font_variant = "mono",
+	},
+	completion = {
+		accept = { auto_brackets = { enabled = false }, },
+		menu = {
+			auto_show = true,
+			draw = {
+				treesitter = { "lsp" },
+				columns = { { "kind_icon", "label", "label_description", gap = 1 }, { "kind" } },
 			},
-			documentation = { auto_show = "true" },
 		},
-		signature = { enabled = "true" },
-		fuzzy = { implementation = "prefer_rust_with_warning" }
-	}
+		documentation = { auto_show = true },
+	},
+	signature = { enabled = true },
+	fuzzy = { implementation = "prefer_rust_with_warning" }
 })
