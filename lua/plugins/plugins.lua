@@ -34,7 +34,8 @@ require("mason-tool-installer").setup({
 -- ===============================
 vim.pack.add({
 	{ src = "https://github.com/rose-pine/neovim" },
-	{ src = "" }
+	{ src = "https://github.com/rebelot/kanagawa.nvim" },
+	{ src = "https://github.com/dysonlee/solarized.nvim" },
 })
 
 require("rose-pine").setup({
@@ -42,6 +43,15 @@ require("rose-pine").setup({
 		transparency = true,
 	},
 })
+
+require("kanagawa").setup({
+	transparent = true,
+})
+
+require("solarized-osaka").setup({
+	transparent = true,
+})
+
 
 vim.cmd [[colorscheme rose-pine]]
 
@@ -159,6 +169,16 @@ require "obsidian".setup({
 			end
 		end
 		return suffix
+	end,
+
+	note_frontmatter_func = function(note)
+		local out = { id = note.id, tags = note.tags }
+		if note.metadata ~= nil and not vim.tbl_isempty(note.metadata) then
+			for k, v in pairs(note.metadata) do
+				out[k] = v
+			end
+		end
+		return out
 	end,
 
 	templates = {
