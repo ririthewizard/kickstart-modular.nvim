@@ -33,7 +33,8 @@ require("mason-tool-installer").setup({
 -- Color scheme
 -- ===============================
 vim.pack.add({
-	{ src = "https://github.com/rose-pine/neovim" }
+	{ src = "https://github.com/rose-pine/neovim" },
+	{ src = "" }
 })
 
 require("rose-pine").setup({
@@ -73,32 +74,6 @@ require("telescope").setup({
 pcall(require("telescope").load_extension, "fzf")
 pcall(require("telescope").load_extension, "ui-select")
 
-local builtin = require "telescope.builtin"
-vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "[F]ind [H]elp" })
-vim.keymap.set("n", "<leader>sk", builtin.keymaps, { desc = "[S]earch [K]eymaps" })
-vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "[F]ind [F]iles" })
-vim.keymap.set("n", "<leader>sw", builtin.grep_string, { desc = "[S]earch current [W]ord" })
-vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "[F]ind by [G]rep" })
-vim.keymap.set("n", "<leader>sd", builtin.diagnostics, { desc = "[S]earch [D]iagnostics" })
-vim.keymap.set("n", "<leader>sr", builtin.resume, { desc = "[S]earch [R]esume" })
-
-vim.keymap.set("n", "<leader>/", function()
-	builtin.current_buffer_fuzzy_find(require("telescope.themes").get_dropdown {
-		winblend = 10,
-		previewer = false,
-	})
-end, { desc = "[/] Fuzzily search in current buffer" })
-
-vim.keymap.set("n", "<leader>s/", function()
-	builtin.live_grep {
-		grep_open_files = true,
-		prompt_title = "Live Grep in Open Files"
-	}
-end, { desc = "[/] Live Grep in Open Files" })
-
-vim.keymap.set("n", "<leader>ec", function()
-	builtin.find_files { cwd = vim.fn.stdpath "config" }
-end, { desc = "[E]dit [C]onfig" })
 
 -- ===============================
 -- Treesitter
