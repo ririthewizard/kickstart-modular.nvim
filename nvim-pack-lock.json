@@ -1,0 +1,44 @@
+{
+  "plugins": {
+    "LuaSnip": {
+      "rev": "3732756"
+    },
+    "blink.cmp": {
+      "version": "1.0.0 - 2.0.0"
+    },
+    "friendly-snippets": [],
+    "kanagawa.nvim": {
+      "rev": "aef7f5c"
+    },
+    "mason-lspconfig.nvim": {
+      "rev": "b1d9a91"
+    },
+    "mason-tool-installer.nvim": [],
+    "mason.nvim": [],
+    "neovim": {
+      "rev": "eb3ff49"
+    },
+    "nvim-lspconfig": {
+      "rev": "2010fc6"
+    },
+    "nvim-treesitter": {
+      "version": "'master'"
+    },
+    "nvim-web-devicons": {
+      "rev": "8dcb311"
+    },
+    "obsidian.nvim": {
+      "version": "'main'"
+    },
+    "plenary.nvim": [],
+    "solarized.nvim": [],
+    "telescope-fzf-native.nvim": {
+      "rev": "6fea601"
+    },
+    "telescope-ui-select.nvim": [],
+    "telescope.nvim": {
+      "rev": "0294ae3"
+    },
+    "undotree": []
+  }
+}

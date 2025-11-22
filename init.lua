@@ -1,6 +1,6 @@
-require("plugins.plugins")
-require("plugins.autocmds")
-require("plugins.configs")
-require("plugins.keymaps")
-require("plugins.lsp")
-require("plugins.statusline")
+require 'plugins.plugins'
+require 'plugins.autocmds'
+require 'plugins.configs'
+require 'plugins.keymaps'
+require 'plugins.lsp'
+require 'plugins.statusline'
