@@ -36,6 +36,9 @@ vim.pack.add {
   { src = 'https://github.com/rose-pine/neovim' },
   { src = 'https://github.com/rebelot/kanagawa.nvim' },
   { src = 'https://github.com/dysonlee/solarized.nvim' },
+  { src = 'https://github.com/scottmckendry/cyberdream.nvim' },
+  { src = 'https://github.com/zenbones-theme/zenbones.nvim' },
+  { src = 'https://github.com/rktjmp/lush.nvim' },
 }
 
 require('rose-pine').setup {
@@ -50,6 +53,12 @@ require('kanagawa').setup {
 
 require('solarized-osaka').setup {
   transparent = true,
+}
+
+require('cyberdream').setup {
+  transparent = true,
+  italic_comments = true,
+  borderless_pickers = true,
 }
 
 vim.cmd [[colorscheme rose-pine]]
@@ -137,11 +146,11 @@ vim.pack.add { 'https://github.com/mbbill/undotree' }
 -- Obsidian
 -- ===============================
 vim.pack.add {
-  { src = 'https://github.com/epwalsh/obsidian.nvim', version = 'main' },
+  { src = 'https://github.com/obsidian-nvim/obsidian.nvim', version = 'main' },
 }
 
 require('obsidian').setup {
-  ft = 'markdown',
+  ft = { 'markdown', 'markdown.obsidian' },
   workspaces = {
     {
       name = 'personal',
@@ -154,7 +163,22 @@ require('obsidian').setup {
     'nvim-treesitter',
   },
 
-  ---@param title string|?
+  frontmatter = {
+    enabled = false,
+  },
+
+  picker = {
+    name = 'telescope.nvim',
+  },
+
+  templates = {
+    folder = '~/Desktop/Obsidian/Things and Stuff/',
+    date_format = '%Y-%m-%d-%a',
+    time_format = '%H:%M',
+  },
+
+  legacy_commands = false,
+
   ---@return string
   note_id_func = function(title)
     local suffix = ''
@@ -177,12 +201,6 @@ require('obsidian').setup {
     end
     return out
   end,
-
-  templates = {
-    folder = '~/Desktop/Obsidian/Things and Stuff/Templates/',
-    date_format = '%Y-%m-%d-%a',
-    time_format = '%H:%M',
-  },
 
   preferred_link_style = 'markdown',
 }

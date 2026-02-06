@@ -65,7 +65,7 @@ vim.opt.iskeyword:append '-'
 vim.opt.path:append '**'
 vim.opt.selection = 'exclusive'
 vim.opt.mouse = 'a'
-vim.opt.clipboard:append 'unnamedplus'
+vim.opt.clipboard = 'unnamedplus'
 vim.opt.encoding = 'UTF-8'
 vim.opt.inccommand = 'split'
 vim.opt.list = true
